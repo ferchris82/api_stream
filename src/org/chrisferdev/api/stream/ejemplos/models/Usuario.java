@@ -1,5 +1,7 @@
 package org.chrisferdev.api.stream.ejemplos.models;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Usuario {
@@ -8,10 +10,30 @@ public class Usuario {
     private Integer id;
     private static int ultimoId;
 
+    private List<Factura> facturas;
+
     public Usuario(String nombre, String apellido) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.id = ++ultimoId;
+        this.facturas = new ArrayList<>();
+    }
+
+    public List<Factura> getFacturas() {
+        return facturas;
+    }
+
+    public void addFactura(Factura factura) {
+        this.facturas.add(factura);
+        factura.setUsuario(this);
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -28,14 +50,6 @@ public class Usuario {
 
     public void setApellido(String apellido) {
         this.apellido = apellido;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     @Override
